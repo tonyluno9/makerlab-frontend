@@ -4,6 +4,7 @@ import UserProfileAvatar from './UserProfileAvatar';
 import OrderHistory from './OrderHistory';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../translations';
+import NotificationBell from './NotificationBell';
 
 export default function Header({ onNavigate, currentPage }) {
   const { language, setLanguage } = useLanguage();
@@ -44,8 +45,8 @@ export default function Header({ onNavigate, currentPage }) {
           </button>
           <button
             className={`text-sm font-medium transition ${currentPage === 'designs'
-                ? 'text-blue-600'
-                : 'text-gray-700 hover:text-gray-900'
+              ? 'text-blue-600'
+              : 'text-gray-700 hover:text-gray-900'
               }`}
             onClick={() => onNavigate?.('designs')}
           >
@@ -56,15 +57,20 @@ export default function Header({ onNavigate, currentPage }) {
           {isAdmin && (
             <button
               onClick={() => onNavigate?.('admin')}
-              className={`text-sm font-medium  transition-all ${
-                currentPage === 'admin' 
-                ? 'text-blue-600' 
+              className={`text-sm font-medium  transition-all ${currentPage === 'admin'
+                ? 'text-blue-600'
                 : 'text-gray-700 hover:text-gray-900'
-              }`}
+                }`}
             >
               Panel Admin
             </button>
           )}
+          <button
+            className={`text-sm font-medium transition ${currentPage === 'reviews' ? 'text-blue-600' : 'text-gray-700 hover:text-gray-900'}`}
+            onClick={() => onNavigate?.('reviews')}
+          >
+            Reseñas
+          </button>
 
           <div className="h-6 w-px bg-gray-200"></div>
           <OrderHistory />
@@ -78,6 +84,7 @@ export default function Header({ onNavigate, currentPage }) {
             <option value="ES">ES</option>
             <option value="EN">EN</option>
           </select>
+          <NotificationBell />
 
           <UserProfileAvatar />
         </nav>

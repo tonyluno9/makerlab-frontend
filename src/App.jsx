@@ -4,7 +4,8 @@ import Auth from './pages/Auth';
 import MainMenu from './pages/MainMenu';
 import Upload from './pages/Upload';
 import Designs from './pages/Designs';
-import AdminDashboard from './pages/AdminDashboard'; 
+import AdminDashboard from './pages/AdminDashboard';
+import ReviewsPage from './pages/ReviewsPage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -17,8 +18,8 @@ function App() {
 
     if (token && userString) {
       const user = JSON.parse(userString); // Convertimos el texto guardado a objeto
-      setIsAuthenticated(true);   
-      
+      setIsAuthenticated(true);
+
       // ¡Aquí está la magia al recargar!
       if (user.role === 'admin') {
         setCurrentPage('admin');
@@ -26,7 +27,7 @@ function App() {
         setCurrentPage('mainmenu');
       }
     }
-  }, []); 
+  }, []);
 
   const handleNavigate = (page, data = null) => {
     setNavigationData(data);
@@ -41,7 +42,7 @@ function App() {
   const handleLogin = (user) => {
     setIsAuthenticated(true);
     setNavigationData(null);
-    
+
     // ¡Aquí está la magia al iniciar sesión!
     if (user && user.role === 'admin') {
       setCurrentPage('admin');
@@ -58,6 +59,7 @@ function App() {
         {currentPage === 'upload' && isAuthenticated && <Upload onNavigate={handleNavigate} />}
         {currentPage === 'designs' && <Designs onNavigate={handleNavigate} />}
         {currentPage === 'admin' && isAuthenticated && <AdminDashboard onNavigate={handleNavigate} />}
+        {currentPage === 'reviews' && <ReviewsPage onNavigate={handleNavigate} />}
       </div>
     </LanguageProvider>
   );
